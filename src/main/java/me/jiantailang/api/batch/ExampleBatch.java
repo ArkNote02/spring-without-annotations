@@ -12,7 +12,7 @@ public class ExampleBatch {
 
 	public static void main(String[] args) {
 		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")) {
-			Service service = (Service) context.getBean("exampleServece");
+			Service service = (Service) context.getBean("exampleService");
 			service.serve();
 		} catch (Exception e) {
 			logger.error("An unexpected exception has occurred", e);
