@@ -15,7 +15,7 @@ public class ExampleBatch {
 			Service service = (Service) context.getBean("exampleService");
 			service.serve();
 		} catch (Exception e) {
-			logger.error("An unexpected exception has occurred", e);
+			logger.error("An unexpected exception has occurred.", e);
 		}
 	}
 }

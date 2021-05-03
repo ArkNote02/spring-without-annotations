@@ -3,13 +3,10 @@
 		xmlns="http://www.springframework.org/schema/mvc"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:beans="http://www.springframework.org/schema/beans"
-		xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="http://www.springframework.org/schema/mvc
 			http://www.springframework.org/schema/mvc/spring-mvc.xsd
 			http://www.springframework.org/schema/beans
-			http://www.springframework.org/schema/beans/spring-beans.xsd
-			http://www.springframework.org/schema/context
-			http://www.springframework.org/schema/context/spring-context.xsd">
+			http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<beans:bean id="exampleDao" class="me.jiantailang.api.dao.impl.ExampleDao"/>
 
@@ -18,12 +15,16 @@
 	</beans:bean>
 
 	<beans:bean id="indexController" class="me.jiantailang.api.controller.IndexController"/>
+	<beans:bean id="exceptionController" class="me.jiantailang.api.controller.ExceptionController"/>
 
 	<beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<beans:property name="mappings">
 			<beans:map>
 				<beans:entry key="/" value-ref="indexController"/>
+				<beans:entry key="/error" value-ref="exceptionController"/>
 			</beans:map>
 		</beans:property>
 	</beans:bean>
+
+	<beans:bean class="me.jiantailang.api.handler.ExceptionResolver"/>
 </beans:beans>
