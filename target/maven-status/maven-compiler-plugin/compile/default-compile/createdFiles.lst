@@ -1,9 +1,12 @@
 me\jiantailang\api\service\impl\ExampleService.class
+me\jiantailang\api\proxy\LogStartEndProxy.class
 me\jiantailang\api\entity\Entity.class
 me\jiantailang\api\controller\IndexController.class
 me\jiantailang\api\Example.class
 me\jiantailang\api\dao\impl\ExampleDao.class
 me\jiantailang\api\service\Service.class
+me\jiantailang\api\proxy\LogHeadersProxy.class
+me\jiantailang\api\controller\oauth\AuthorizeController.class
 me\jiantailang\api\handler\ExceptionResolver.class
 me\jiantailang\api\controller\ExceptionController.class
 me\jiantailang\api\batch\ExampleBatch.class

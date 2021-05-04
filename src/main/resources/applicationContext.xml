@@ -3,10 +3,13 @@
 		xmlns="http://www.springframework.org/schema/mvc"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:beans="http://www.springframework.org/schema/beans"
+		xmlns:aop="http://www.springframework.org/schema/aop"
 		xsi:schemaLocation="http://www.springframework.org/schema/mvc
 			http://www.springframework.org/schema/mvc/spring-mvc.xsd
 			http://www.springframework.org/schema/beans
-			http://www.springframework.org/schema/beans/spring-beans.xsd">
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<beans:bean id="exampleDao" class="me.jiantailang.api.dao.impl.ExampleDao"/>
 
@@ -15,16 +18,42 @@
 	</beans:bean>
 
 	<beans:bean id="indexController" class="me.jiantailang.api.controller.IndexController"/>
+	<beans:bean id="authorizeController" class="me.jiantailang.api.controller.oauth.AuthorizeController">
+		<beans:property name="service" ref="exampleService"/>
+	</beans:bean>
 	<beans:bean id="exceptionController" class="me.jiantailang.api.controller.ExceptionController"/>
 
 	<beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<beans:property name="mappings">
 			<beans:map>
 				<beans:entry key="/" value-ref="indexController"/>
+				<beans:entry key="/oauth/authorize" value-ref="authorizeController"/>
 				<beans:entry key="/error" value-ref="exceptionController"/>
 			</beans:map>
 		</beans:property>
 	</beans:bean>
 
+	<!-- Resolves all unhandled exceptions. -->
 	<beans:bean class="me.jiantailang.api.handler.ExceptionResolver"/>
+
+	<!-- Outputs request and response headers log. -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:bean class="me.jiantailang.api.proxy.LogHeadersProxy"/>
+		</interceptor>
+	</interceptors>
+
+	<!-- Outputs start and end log of public methods in specified packages. -->
+	<beans:bean id="logStartEndProxy" class="me.jiantailang.api.proxy.LogStartEndProxy"/>
+	<aop:config>
+		<aop:aspect ref="logStartEndProxy">
+			<aop:pointcut id="servicePointcut" expression="execution(* me.jiantailang.api.service..*(..))"/>
+			<aop:before method="logStart" pointcut-ref="servicePointcut"/>
+			<aop:after method="logEnd" pointcut-ref="servicePointcut"/>
+			<aop:pointcut id="daoPointcut" expression="execution(* me.jiantailang.api.dao..*(..))"/>
+			<aop:before method="logStart" pointcut-ref="daoPointcut"/>
+			<aop:after method="logEnd" pointcut-ref="daoPointcut"/>
+		</aop:aspect>
+	</aop:config>
 </beans:beans>

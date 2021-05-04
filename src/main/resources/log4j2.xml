@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="ERROR">
 	<Appenders>
-		<Console name="Console" target="SYSTEM_OUT">
+		<Console name="SystemOut" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} [%t] %-5p %c{1} - %m%n"/>
+		</Console>
+		<Console name="SystemErr" target="SYSTEM_ERR">
 			<PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} [%t] %-5p %c{1} - %m%n"/>
 		</Console>
 		<RollingFile
@@ -18,7 +21,8 @@
 	</Appenders>
 	<Loggers>
 		<Root level="INFO">
-			<AppenderRef ref="Console"/>
+			<AppenderRef ref="SystemOut"/>
+			<AppenderRef ref="SystemErr" level="ERROR"/>
 			<AppenderRef ref="RollingFile"/>
 		</Root>
 	</Loggers>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ExceptionController extends AbstractController {
 
 	@Override
-	protected ModelAndView handleRequestInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		throw new Exception("An exception has occurred.");
 	}
 }
