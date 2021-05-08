@@ -13,7 +13,7 @@ public class ExampleDao implements Dao {
 	}
 
 	@Override
-	public Entity read(int id) {
+	public Entity read(String id) {
 		throw new UnsupportedOperationException("ExampleDao#read is not supported.");
 	}
 
@@ -28,7 +28,7 @@ public class ExampleDao implements Dao {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(String id) {
 		throw new UnsupportedOperationException("ExampleDao#delete is not supported.");
 	}
 }

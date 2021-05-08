@@ -4,11 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
+import javax.servlet.http.HttpSession;
 
 public class IndexController extends AbstractController {
 
@@ -16,18 +15,11 @@ public class IndexController extends AbstractController {
 
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		Enumeration<String> headerNames = request.getHeaderNames();
-		if (headerNames != null) {
-			while (headerNames.hasMoreElements()) {
-				String name = headerNames.nextElement();
-				logger.info(name + ": " + request.getHeader(name));
-			}
-		}
-
+		HttpSession session = request.getSession();
+		session.invalidate();
+		session = request.getSession(true); // new session instance
+		session.setAttribute("email", request.getParameter("email"));
 		response.setHeader("Connection", "close");
-		ModelAndView model = new ModelAndView(new MappingJackson2JsonView());
-		model.addObject("result", "success");
-		return model;
+		return new ModelAndView("index");
 	}
 }

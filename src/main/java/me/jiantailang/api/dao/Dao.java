@@ -8,11 +8,11 @@ public interface Dao {
 
 	int create(Entity entity);
 
-	Entity read(int id);
+	Entity read(String id);
 
 	List<Entity> readAll();
 
 	int edit(Entity entity);
 
-	int delete(int id);
+	int delete(String id);
 }
