@@ -16,6 +16,7 @@ public class LogHeadersProxy implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		logger.info("start " + request.getMethod() + " " + request.getContextPath());
 		Enumeration<String> headerNames = request.getHeaderNames();
 		if (headerNames != null) {
 			while (headerNames.hasMoreElements()) {
@@ -32,6 +33,7 @@ public class LogHeadersProxy implements HandlerInterceptor {
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+		logger.info("end " + request.getMethod() + " " + request.getContextPath());
 		Collection<String> headerNames = response.getHeaderNames();
 		if (headerNames != null) {
 			for (String headerName : headerNames) {
