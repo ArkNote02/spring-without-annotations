@@ -1,7 +1,5 @@
 package me.jiantailang.api.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -10,10 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 
 public class IndexController extends AbstractController {
 
-	private static final Logger logger = LogManager.getLogger(IndexController.class);
-
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String method = request.getMethod();
+		if ("GET".equals(method)) {
+			return get(request, response);
+		} else {
+			throw new IllegalAccessException(method + " method is not supported.");
+		}
+	}
+
+	private ModelAndView get(HttpServletRequest request, HttpServletResponse response) {
 		response.setHeader("Connection", "close");
 		return new ModelAndView("index");
 	}

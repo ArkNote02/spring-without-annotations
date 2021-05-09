@@ -23,6 +23,7 @@
 	</beans:bean>
 	<beans:bean id="exceptionController" class="me.jiantailang.api.controller.ExceptionController"/>
 	<beans:bean id="loginController" class="me.jiantailang.api.controller.LoginController"/>
+	<beans:bean id="logoutController" class="me.jiantailang.api.controller.LogoutController"/>
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/"/>
@@ -33,6 +34,7 @@
 		<beans:property name="mappings">
 			<beans:map>
 				<beans:entry key="/login" value-ref="loginController"/>
+				<beans:entry key="/logout" value-ref="logoutController"/>
 				<beans:entry key="/" value-ref="indexController"/>
 				<beans:entry key="/oauth/authorize" value-ref="authorizeController"/>
 				<beans:entry key="/error" value-ref="exceptionController"/>

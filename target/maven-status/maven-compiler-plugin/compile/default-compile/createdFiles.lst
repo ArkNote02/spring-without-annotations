@@ -2,6 +2,7 @@ me\jiantailang\api\data\AuthorizeData.class
 me\jiantailang\api\service\impl\ExampleService.class
 me\jiantailang\api\proxy\LogStartEndProxy.class
 me\jiantailang\api\entity\Entity.class
+me\jiantailang\api\controller\LogoutController.class
 me\jiantailang\api\service\impl\AuthorizeService.class
 me\jiantailang\api\controller\IndexController.class
 me\jiantailang\api\Example.class
